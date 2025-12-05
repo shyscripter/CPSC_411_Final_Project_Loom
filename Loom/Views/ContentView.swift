@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct ContentView: View {
     
     @State private var isPresented: Bool = false
     
@@ -39,6 +39,6 @@ struct HomeView: View {
 
 struct ContentView_Preview: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        ContentView()
     }
 }
