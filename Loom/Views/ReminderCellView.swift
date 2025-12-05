@@ -7,10 +7,18 @@
 
 import SwiftUI
 
+// Represents each type of action we can make for closures which can be fired
+enum ReminderCellEvents {
+    case onInfo
+    case onCheckedChange(Reminder)
+    case onSelect(Reminder)
+}
+
 struct ReminderCellView: View {
     
     let reminder: Reminder
     @State private var checked: Bool = false
+    let onEvent: (ReminderCellEvents) -> Void
     
     private func formatDate(_ date: Date) -> String {
         if date.isToday {
@@ -30,6 +38,7 @@ struct ReminderCellView: View {
                 .opacity(0.4)
                 .onTapGesture{
                     checked.toggle()
+                    onEvent(.onCheckedChange(reminder))
                 }
             
             VStack(alignment: .leading) {
@@ -54,10 +63,19 @@ struct ReminderCellView: View {
                     .opacity(0.4)
             }
             
+            Spacer()
+            Image(systemName: "info.circle.fill")
+                .onTapGesture {
+                    onEvent(.onInfo)
+                }
+        }
+        .contentShape(Rectangle()) // Makes the whole thing clickable
+        .onTapGesture {
+            onEvent(.onSelect(reminder))
         }
     }
 }
 
 #Preview {
-    ReminderCellView(reminder: PreviewData.reminder)
+    ReminderCellView(reminder: PreviewData.reminder, onEvent: {_ in })
 }
