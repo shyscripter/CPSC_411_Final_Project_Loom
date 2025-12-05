@@ -39,7 +39,6 @@ struct AddNewListView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    // FIXED LINE 32 BELOW:
                     Text("New List")
                         .font(.headline)
                 }

@@ -18,6 +18,9 @@ class CoreDataProvider {
     // Private constructor to make sure there's only one provider
     private init() {
         
+        // Register transformers
+        ValueTransformer.setValueTransformer(UIColorTransformer(), forName: NSValueTransformerName("UIColorTransformer"))
+        
         // Create a persistent container, app crashes if this model doesn't exist
         persistentContainer = NSPersistentContainer(name: "ReminderModel")
         persistentContainer.loadPersistentStores() { desc, error in

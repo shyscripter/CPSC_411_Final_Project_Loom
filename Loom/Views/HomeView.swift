@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     
     @State private var isPresented: Bool = false
     
@@ -27,7 +27,11 @@ struct ContentView: View {
             }.sheet(isPresented: $isPresented) {
                 NavigationView {
                     AddNewListView { name, color in
-                        // save the list to the database
+                        do {
+                            try ReminderService.saveMyList(name, color)
+                        } catch {
+                            print(error)
+                        }
                     }
                 }
             }
@@ -39,6 +43,7 @@ struct ContentView: View {
 
 struct ContentView_Preview: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
+            .environment(\.managedObjectContext, CoreDataProvider.shared.persistentContainer.viewContext)
     }
 }
