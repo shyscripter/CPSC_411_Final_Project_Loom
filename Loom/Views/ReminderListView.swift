@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReminderListView: View {
     
+    @State private var selectedReminder: Reminder?
+    @State private var showReminderDetail: Bool = false
     let reminders: FetchedResults<Reminder>
     
     // Function up here because i like cleaner code
@@ -23,18 +25,26 @@ struct ReminderListView: View {
         }
     }
     
+    private func isReminderSelected(_ reminder: Reminder) -> Bool {
+        return (selectedReminder?.objectID == reminder.objectID)
+    }
+    
     var body: some View {
-        List(reminders) { reminder in
-            ReminderCellView(reminder: reminder) { event in
-                switch event {
-                    case .onSelect(let reminder):
-                        print("ON SELECTED")
-                    case .onCheckedChange(let reminder, let isCompleted):
-                        reminderCheckedChange(reminder: reminder, isCompleted: isCompleted)
-                    case .onInfo:
-                        print("ON INFO")
+        VStack {
+            List(reminders) { reminder in
+                ReminderCellView(reminder: reminder, isSelected: isReminderSelected(reminder)) { event in
+                    switch event {
+                        case .onSelect(let reminder):
+                            selectedReminder = reminder
+                        case .onCheckedChange(let reminder, let isCompleted):
+                            reminderCheckedChange(reminder: reminder, isCompleted: isCompleted)
+                        case .onInfo:
+                            showReminderDetail = true
+                    }
                 }
             }
+        }.sheet(isPresented: $showReminderDetail) {
+            ReminderDetailView(reminder: Binding($selectedReminder)!)
         }
     }
 }
