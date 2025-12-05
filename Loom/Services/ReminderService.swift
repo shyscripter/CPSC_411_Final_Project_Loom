@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import UIKit
 
+// Custom service for reminder access
 class ReminderService {
     
     static var viewContext: NSManagedObjectContext {
@@ -34,6 +35,14 @@ class ReminderService {
         reminder.title = reminderTitle
         myList.addToReminders(reminder)
         try save()
+    }
+    
+    // Get the remidners in one specific list
+    static func getRemindersByList(myList: MyList) -> NSFetchRequest<Reminder> {
+        let request = Reminder.fetchRequest()
+        request.sortDescriptors = []
+        request.predicate = NSPredicate(format: "list = %@ AND isCompleted = false", myList)
+        return request
     }
     
 }
