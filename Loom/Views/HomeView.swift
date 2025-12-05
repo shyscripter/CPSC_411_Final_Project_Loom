@@ -11,25 +11,31 @@ struct HomeView: View {
     
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>
+    @FetchRequest(sortDescriptors: [])
+    private var searchResults: FetchedResults<Reminder>
     
+    @State private var search: String = ""
+    @State private var searching: Bool = false
     @State private var isPresented: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                
-                MyListsView(myLists: myListResults)
-                
-                //Spacer()
-                
-                Button {
-                    isPresented = true
-                } label: {
-                    Text("Add List")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .font(.headline)
-                }.padding()
-            }.sheet(isPresented: $isPresented) {
+                ScrollView {
+                    MyListsView(myLists: myListResults)
+                    
+                    //Spacer()
+                    
+                    Button {
+                        isPresented = true
+                    } label: {
+                        Text("Add List")
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .font(.headline)
+                    }.padding()
+                }
+            }
+            .sheet(isPresented: $isPresented) {
                 NavigationView {
                     AddNewListView { name, color in
                         do {
@@ -40,8 +46,18 @@ struct HomeView: View {
                     }
                 }
             }
-        }
-        .padding()
+            .listStyle(.plain)
+            .onChange(of: search, perform: {searchTerm in
+                searching = !searchTerm.isEmpty ? true: false
+                searchResults.nsPredicate = ReminderService.getRemindersBySearchTerm(search).predicate
+            })
+            .overlay(alignment: .center, content: {
+                ReminderListView(reminders: searchResults)
+                    .opacity(searching ? 1.0: 0.0)
+            }).frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
+                .navigationTitle("Reminders")
+        }.searchable(text: $search)
     }
     
 }

@@ -65,4 +65,12 @@ class ReminderService {
         try save()
     }
     
+    // Get all reminders that fit within a searched term
+    static func getRemindersBySearchTerm(_ searchTerm: String) -> NSFetchRequest<Reminder> {
+        let request = Reminder.fetchRequest()
+        request.sortDescriptors = []
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchTerm)
+        return request
+    }
+    
 }
