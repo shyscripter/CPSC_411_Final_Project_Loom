@@ -10,13 +10,15 @@ import SwiftUI
 // Represents each type of action we can make for closures which can be fired
 enum ReminderCellEvents {
     case onInfo
-    case onCheckedChange(Reminder)
+    case onCheckedChange(Reminder, Bool)
     case onSelect(Reminder)
 }
 
 struct ReminderCellView: View {
     
     let reminder: Reminder
+    let delay = Delay()
+    
     @State private var checked: Bool = false
     let onEvent: (ReminderCellEvents) -> Void
     
@@ -38,7 +40,12 @@ struct ReminderCellView: View {
                 .opacity(0.4)
                 .onTapGesture{
                     checked.toggle()
-                    onEvent(.onCheckedChange(reminder))
+                    
+                    // Cancel the old task then call a new delay
+                    delay.cancel()
+                    delay.performWork {
+                       onEvent(.onCheckedChange(reminder, checked))
+                    }
                 }
             
             VStack(alignment: .leading) {
