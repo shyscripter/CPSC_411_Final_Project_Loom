@@ -16,7 +16,7 @@ class ReminderService {
         CoreDataProvider.shared.persistentContainer.viewContext
     }
     
-    // Helper function for faster writing
+    // Helper function for faster typing
     static func save() throws {
         try viewContext.save()
     }
@@ -27,6 +27,20 @@ class ReminderService {
         myList.name = name
         myList.color = color
         try save()
+    }
+    
+    // Updates the reminder in the database to newly passed attributes
+    static func updateReminder(reminder: Reminder, editConfig: ReminderEditConfig) throws -> Bool {
+        
+        let reminderToUpdate = reminder
+        reminderToUpdate.isCompleted = editConfig.isCompleted
+        reminderToUpdate.title = editConfig.title
+        reminderToUpdate.notes = editConfig.notes
+        reminderToUpdate.reminderDate = editConfig.hasDate ? editConfig.reminderDate: nil
+        reminderToUpdate.reminderTime = editConfig.hasTime ? editConfig.reminderTime : nil
+        
+        try save()
+        return true
     }
     
     // Function to save a reminder
