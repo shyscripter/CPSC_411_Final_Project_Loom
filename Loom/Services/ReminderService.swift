@@ -59,4 +59,10 @@ class ReminderService {
         return request
     }
     
+    // Delete a reminder from the database when we're done using it
+    static func deleteReminder(_ reminder: Reminder) throws {
+        viewContext.delete(reminder)
+        try save()
+    }
+    
 }
