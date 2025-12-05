@@ -20,11 +20,19 @@ class ReminderService {
         try viewContext.save()
     }
     
-    // Create a function to save a list
+    // Function to save a list
     static func saveMyList(_ name: String, _ color: UIColor) throws {
         let myList = MyList(context: viewContext)
         myList.name = name
         myList.color = color
+        try save()
+    }
+    
+    // Function to save a reminder
+    static func saveReminderToMyList(myList: MyList, reminderTitle: String) throws {
+        let reminder = Reminder(context: viewContext)
+        reminder.title = reminderTitle
+        myList.addToReminders(reminder)
         try save()
     }
     

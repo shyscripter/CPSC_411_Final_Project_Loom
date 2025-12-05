@@ -18,9 +18,7 @@ struct HomeView: View {
         NavigationStack {
             VStack {
                 
-                List(myListResults) { list in
-                    Text(list.name)
-                }
+                MyListsView(myLists: myListResults)
                 
                 //Spacer()
                 
