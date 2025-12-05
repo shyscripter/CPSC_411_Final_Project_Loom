@@ -57,7 +57,7 @@ struct AddNewListView: View {
                     onSave(name, UIColor(selectedColor))
                     
                     dismiss()
-                }.disabled(isFormValid)
+                }.disabled(!isFormValid)
             }
         }
     }
