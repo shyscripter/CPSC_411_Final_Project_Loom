@@ -11,6 +11,7 @@ struct HomeView: View {
     
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>
+    
     @FetchRequest(sortDescriptors: [])
     private var searchResults: FetchedResults<Reminder>
     
