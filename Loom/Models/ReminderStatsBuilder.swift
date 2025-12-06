@@ -8,7 +8,15 @@
 import Foundation
 import SwiftUI
 
-// Holds teh values we want to display on the screen
+// Way for other files to track reminder types
+enum ReminderStatType {
+    case today
+    case all
+    case scheduled
+    case completed
+}
+
+// Holds the values we want to display on the screen
 struct ReminderStatsValues {
     var todayCount: Int = 0
     var scheduledCount: Int = 0

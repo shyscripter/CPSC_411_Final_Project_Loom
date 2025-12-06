@@ -15,6 +15,18 @@ struct HomeView: View {
     @FetchRequest(sortDescriptors: [])
     private var searchResults: FetchedResults<Reminder>
     
+    @FetchRequest(fetchRequest: ReminderService.remindersByStatType(.today))
+    private var todayResults: FetchedResults<Reminder>
+    
+    @FetchRequest(fetchRequest: ReminderService.remindersByStatType(.scheduled))
+    private var scheduledResults: FetchedResults<Reminder>
+    
+    @FetchRequest(fetchRequest: ReminderService.remindersByStatType(.completed))
+    private var completedResults: FetchedResults<Reminder>
+    
+    @FetchRequest(fetchRequest: ReminderService.remindersByStatType(.all))
+    private var allResults: FetchedResults<Reminder>
+    
     @State private var search: String = ""
     @State private var searching: Bool = false
     @State private var isPresented: Bool = false
@@ -28,12 +40,31 @@ struct HomeView: View {
                 ScrollView {
                     
                     HStack {
-                        ReminderStatsView(icon: "calendar", title: "Today", count: reminderStatsValues.todayCount)
-                        ReminderStatsView(icon: "tray.circle.fill", title: "All", count: reminderStatsValues.allCount)
+                        NavigationLink {
+                            ReminderListView(reminders: todayResults)
+                        } label: {
+                            ReminderStatsView(icon: "calendar", title: "Today", count: reminderStatsValues.todayCount)
+                        }
+                        
+                        NavigationLink {
+                            ReminderListView(reminders: allResults)
+                        } label: {
+                            ReminderStatsView(icon: "tray.circle.fill", title: "All", count: reminderStatsValues.allCount)
+                        }
                     }
                     HStack {
-                        ReminderStatsView(icon: "clock", title: "Scheduled", count: reminderStatsValues.scheduledCount)
-                        ReminderStatsView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatsValues.completedCount)
+                        NavigationLink {
+                            ReminderListView(reminders: scheduledResults)
+                        } label: {
+                            ReminderStatsView(icon: "clock", title: "Scheduled", count: reminderStatsValues.scheduledCount)
+                        }
+                        
+                        NavigationLink {
+                            ReminderListView(reminders: completedResults)
+                        } label: {
+                            ReminderStatsView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatsValues.completedCount)
+                        }
+                        
                     }
                     
                     Text("My Lists")
