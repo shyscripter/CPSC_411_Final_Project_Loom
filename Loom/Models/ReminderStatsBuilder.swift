@@ -38,6 +38,7 @@ struct ReminderStatsBuilder {
         let today = todayCount(reminders: remindersArray)
         let scheduled = scheduledCount(reminders: remindersArray)
         
+        // Return the full results of stat values
         return ReminderStatsValues(todayCount: today, scheduledCount: scheduled, completedCount: completed, allCount: all)
     }
     

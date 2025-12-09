@@ -11,7 +11,7 @@ import UserNotifications
 @main
 struct LoomApp: App {
     
-    // Request permission for notifications to be enabled
+    // Request permission for notifications to be enabled on app startup
     init() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
@@ -23,7 +23,7 @@ struct LoomApp: App {
         }
     }
     
-    
+    // Call for the rest of the UI and data to show up
     var body: some Scene {
         WindowGroup {
             HomeView()

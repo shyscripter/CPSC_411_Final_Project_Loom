@@ -7,7 +7,10 @@
 
 import Foundation
 
+// Custom structure to represent new variables to assign when editing a reminder
 struct ReminderEditConfig {
+    
+    // Default values
     var title: String = ""
     var notes: String?
     var isCompleted: Bool = false
@@ -18,6 +21,7 @@ struct ReminderEditConfig {
     
     init() {}
     
+    // Constructor that passes a reminder to edit
     init(reminder: Reminder) {
         title = reminder.title ?? ""
         notes = reminder.notes

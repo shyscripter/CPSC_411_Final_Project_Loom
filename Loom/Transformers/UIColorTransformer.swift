@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-// Transforms types for compatibility with ReminderModel
+// Transforms types for compatibility with ReminderModel for CoreData
 class UIColorTransformer: ValueTransformer {
     
-    // Archives passed data
+    // Archives passed data into a compatible type for data storage
     override func transformedValue(_ value: Any?) -> Any? {
         guard let color = value as? UIColor else { return nil }
         
@@ -23,7 +23,7 @@ class UIColorTransformer: ValueTransformer {
         }
     }
     
-    // Takes the data and unarchives it
+    // Takes the data and unarchives it to a compatible type for UI usage
     override func reverseTransformedValue(_ value: Any?) -> Any? {
         
         guard let data = value as? Data else { return nil }

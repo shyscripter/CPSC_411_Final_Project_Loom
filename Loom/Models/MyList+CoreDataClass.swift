@@ -5,6 +5,9 @@
 //  Created by Aaron Haight on 12/4/25.
 //
 
+// This file would typically be automatically generated when making new objects using CoreData
+// However, we needed to make this file manually because we use the UIColor data type when storing lists (categories)
+
 import Foundation
 import CoreData
 

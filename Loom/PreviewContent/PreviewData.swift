@@ -8,6 +8,8 @@
 import Foundation
 import CoreData
 
+// Class to allow the data to be previewed in-app
+// PreviewData's values are sent to the preview function for ease of use when working on new features
 class PreviewData {
     
     static var myList: MyList {

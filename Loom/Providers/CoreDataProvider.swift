@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-// Class is responsible for setting up the CoreData upon app loading
+// This class is responsible for setting up the CoreData upon app loading
 class CoreDataProvider {
     
     // We only want one instance of this provider

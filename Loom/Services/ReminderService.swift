@@ -16,7 +16,7 @@ class ReminderService {
         CoreDataProvider.shared.persistentContainer.viewContext
     }
     
-    // Helper function for faster typing
+    // Helper function for faster code writing
     static func save() throws {
         try viewContext.save()
     }
@@ -32,6 +32,7 @@ class ReminderService {
     // Updates the reminder in the database to newly passed attributes
     static func updateReminder(reminder: Reminder, editConfig: ReminderEditConfig) throws -> Bool {
         
+        // Create a new reminder to pass to EditConfig
         let reminderToUpdate = reminder
         reminderToUpdate.isCompleted = editConfig.isCompleted
         reminderToUpdate.title = editConfig.title
@@ -43,7 +44,7 @@ class ReminderService {
         return true
     }
     
-    // Function to save a reminder
+    // Function to save a reminder to the database
     static func saveReminderToMyList(myList: MyList, reminderTitle: String) throws {
         let reminder = Reminder(context: viewContext)
         reminder.title = reminderTitle
@@ -51,7 +52,7 @@ class ReminderService {
         try save()
     }
     
-    // Get the remidners in one specific list
+    // Get all of the reminders in one specific list
     static func getRemindersByList(myList: MyList) -> NSFetchRequest<Reminder> {
         let request = Reminder.fetchRequest()
         request.sortDescriptors = []
@@ -59,13 +60,13 @@ class ReminderService {
         return request
     }
     
-    // Delete a reminder from the database when we're done using it
+    // Delete a reminder from the database when the user prompts it to be deleted
     static func deleteReminder(_ reminder: Reminder) throws {
         viewContext.delete(reminder)
         try save()
     }
     
-    // Get all reminders that fit within a searched term
+    // Get all reminders that fit within a searched term for the search bar
     static func getRemindersBySearchTerm(_ searchTerm: String) -> NSFetchRequest<Reminder> {
         let request = Reminder.fetchRequest()
         request.sortDescriptors = []
@@ -73,7 +74,7 @@ class ReminderService {
         return request
     }
     
-    // Fetch reminders according to a specific type
+    // Fetch reminders according to a specific type, searching by attributes
     static func remindersByStatType(_ statType: ReminderStatType) -> NSFetchRequest<Reminder> {
         let request = Reminder.fetchRequest()
         request.sortDescriptors = []
