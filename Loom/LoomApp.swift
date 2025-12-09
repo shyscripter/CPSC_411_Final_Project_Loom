@@ -17,7 +17,7 @@ struct LoomApp: App {
             if granted {
                 // Notificaitons are allowed
             } else {
-                // Display a message to the user
+                // TODO: Display a message to the user
             }
             
         }
