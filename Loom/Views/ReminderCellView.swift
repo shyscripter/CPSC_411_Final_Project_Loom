@@ -16,13 +16,16 @@ enum ReminderCellEvents {
 
 struct ReminderCellView: View {
     
+    // Reminder and delay variables to allow user control of the object
     let reminder: Reminder
     let delay = Delay()
     let isSelected: Bool
     
+    // Events
     @State private var checked: Bool = false
     let onEvent: (ReminderCellEvents) -> Void
     
+    // Utility function to display upcoming times instead of exact dates when close enough to the current time
     private func formatDate(_ date: Date) -> String {
         if date.isToday {
             return "Today"
@@ -34,21 +37,25 @@ struct ReminderCellView: View {
     }
     
     var body: some View {
+        
+        // Let the checked toggle be on the very left and move everything else to the right of the cell
         HStack {
             
+            // Toggleable button to click when the reminder is completed
             Image(systemName: checked ? "circle.inset.filled": "circle")
                 .font(.title2)
                 .opacity(0.4)
                 .onTapGesture{
                     checked.toggle()
                     
-                    // Cancel the old task then call a new delay
+                    // Cancel the old task then call a new delay when the circle is toggled
                     delay.cancel()
                     delay.performWork {
                        onEvent(.onCheckedChange(reminder, checked))
                     }
                 }
             
+            // Vertically stack all components for date and time
             VStack(alignment: .leading) {
                 Text(reminder.title ?? "")
                 if let notes = reminder.notes, !notes.isEmpty {
@@ -57,6 +64,7 @@ struct ReminderCellView: View {
                         .font(.caption)
                 }
                 
+                // Horizontal stack to show the date and time next to each other
                 HStack {
                     if let reminderDate = reminder.reminderDate {
                         Text(formatDate(reminderDate))
@@ -71,23 +79,29 @@ struct ReminderCellView: View {
                     .opacity(0.4)
             }
             
+            // Empty space in between
             Spacer()
+            
+            // When tapping the info circle on the right, open the details of the reminder
             Image(systemName: "info.circle.fill")
                 .opacity(isSelected ? 1.0 : 0.0)
                 .onTapGesture {
                     onEvent(.onInfo)
                 }
         }
+        // When loaded, correctly assign the checked flag
         .onAppear {
             checked = reminder.isCompleted
         }
-        .contentShape(Rectangle()) // Makes the whole thing clickable
+        // Makes the whole thing clickable instead of just the buttons when selecting a reminder
+        .contentShape(Rectangle())
         .onTapGesture {
             onEvent(.onSelect(reminder))
         }
     }
 }
 
+// Preview functionality
 #Preview {
     ReminderCellView(reminder: PreviewData.reminder, isSelected: false, onEvent: {_ in })
 }

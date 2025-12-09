@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddNewListView: View {
     
-    // Variables for the name and color of each list
+    // Variables for the name and color of each new list
     @Environment(\.dismiss) private var dismiss
     @State private var name: String = ""
     @State private var selectedColor: Color = .yellow
@@ -27,7 +27,7 @@ struct AddNewListView: View {
         // Stack for all existing lists and color pickers
         VStack {
             
-            // Padded stack for every existing list that we have saved in the database
+            // Padded stack to preview the new list that is being saved
             VStack {
                 
                 // List icon colored as the user defined it when saving

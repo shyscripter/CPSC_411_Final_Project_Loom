@@ -9,15 +9,21 @@ import SwiftUI
 
 struct ColorPickerView: View {
     
+    // Flag to remember the selected color the user gives, with a default provided on init
     @Binding var selectedColor: Color
     
+    // All allowed UI colors are hardcoded
     let colors: [Color] = [.red, .green, .blue, .yellow, .orange, .purple]
     
     var body: some View {
         
-        // Creates buttons of each existing color category to group reminders
+        // Creates ordered buttons of each color that's hardcoded above
         HStack {
+            
+            // Iterates through each existing color
             ForEach(colors, id: \.self) { color in
+                
+                // Stack creates icons for each color that exists in the hardcoded list
                 ZStack {
                     Circle().fill()
                         .foregroundColor(color)
@@ -38,6 +44,7 @@ struct ColorPickerView: View {
     }
 }
 
+// Preview with a hardcoded default color
 #Preview {
     ColorPickerView(selectedColor: .constant(.yellow))
 }
