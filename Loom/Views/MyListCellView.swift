@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyListCellView: View {
     
-    // Reference to view all remidners inside of a given list
+    // Reference to view a given list
     let myList: MyList
     
     var body: some View {
