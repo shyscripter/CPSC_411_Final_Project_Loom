@@ -101,7 +101,7 @@ struct HomeView: View {
                     
                     // View all existing lists
                     MyListsView(myLists: myListResults)
-                        .frame(height: CGFloat(myListResults.count) * 50 + 50) // Dynamic counting required because of a SwiftUI bug
+                        .frame(height: CGFloat(myListResults.count) * 30) // Dynamic counting required because of a SwiftUI bug
                     
                     Button {
                         isPresented = true
