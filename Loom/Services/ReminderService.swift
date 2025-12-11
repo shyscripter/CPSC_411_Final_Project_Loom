@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftUI
 
 // Custom service for reminder access
 class ReminderService {
@@ -106,8 +107,17 @@ class ReminderService {
     // Delete a list by deleting all reminders the list has, then the list itself from the databse
     static func deleteList(_ myList: MyList) throws {
         
-        // Go through all reminders this list has and delete them
+        // Find all reminders in this particular list
+        var reminderResults = FetchRequest<Reminder>(fetchRequest: getRemindersByList(myList: myList, includeCompleted: false))
         
+        // Delete every reminder inside of the list
+        for reminder in reminderResults.wrappedValue {
+            do {
+                try deleteReminder(reminder)
+            } catch {
+                print(error)
+            }
+        }
         
         // Delete the list from the database once it is empty
         viewContext.delete(myList)
