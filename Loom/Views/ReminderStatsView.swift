@@ -13,7 +13,8 @@ struct ReminderStatsView: View {
     let icon: String
     let title: String
     var count: Int?
-    var iconColor: Color = .blue
+    var iconColor: Color = .white
+    let frameColor: Color
     
     var body: some View {
         
@@ -44,7 +45,7 @@ struct ReminderStatsView: View {
             // Give padding to all elements inside the whole horizontal stack
             }.padding()
                 .frame(maxWidth: .infinity)
-                .background(.gray)
+                .background(frameColor)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
         }
@@ -53,5 +54,5 @@ struct ReminderStatsView: View {
 
 // Preview functionality (hardcoded for display testing)
 #Preview {
-    ReminderStatsView(icon: "calendar", title: "Today", count: 9)
+    ReminderStatsView(icon: "calendar", title: "Today", count: 9, frameColor: .blue)
 }

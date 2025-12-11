@@ -62,14 +62,14 @@ struct HomeView: View {
                         NavigationLink {
                             ReminderListView(reminders: todayResults)
                         } label: {
-                            ReminderStatsView(icon: "calendar", title: "Today", count: reminderStatsValues.todayCount)
+                            ReminderStatsView(icon: "calendar", title: "Today", count: reminderStatsValues.todayCount, frameColor: .red)
                         }
                         
                         // Navigation to all reminders
                         NavigationLink {
                             ReminderListView(reminders: allResults)
                         } label: {
-                            ReminderStatsView(icon: "tray.circle.fill", title: "All", count: reminderStatsValues.allCount)
+                            ReminderStatsView(icon: "tray.circle.fill", title: "All", count: reminderStatsValues.allCount, frameColor: .blue)
                         }
                     }
                     
@@ -80,14 +80,14 @@ struct HomeView: View {
                         NavigationLink {
                             ReminderListView(reminders: scheduledResults)
                         } label: {
-                            ReminderStatsView(icon: "clock", title: "Scheduled", count: reminderStatsValues.scheduledCount)
+                            ReminderStatsView(icon: "clock", title: "Scheduled", count: reminderStatsValues.scheduledCount, frameColor: .yellow)
                         }
                         
                         // Navigaiton to completed reminders
                         NavigationLink {
                             ReminderListView(reminders: completedResults)
                         } label: {
-                            ReminderStatsView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatsValues.completedCount)
+                            ReminderStatsView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatsValues.completedCount, frameColor: .green)
                         }
                         
                     }
