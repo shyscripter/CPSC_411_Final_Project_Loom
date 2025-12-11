@@ -12,7 +12,7 @@ struct AddNewListView: View {
     // Variables for the name and color of each new list
     @Environment(\.dismiss) private var dismiss
     @State private var name: String = ""
-    @State private var selectedColor: Color = .yellow
+    @State private var selectedColor: Color = .red
     
     // Closure to save
     let onSave: (String, UIColor) -> Void
