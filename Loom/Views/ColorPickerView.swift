@@ -13,7 +13,7 @@ struct ColorPickerView: View {
     @Binding var selectedColor: Color
     
     // All allowed UI colors are hardcoded
-    let colors: [Color] = [.red, .green, .blue, .yellow, .orange, .purple]
+    let colors: [Color] = [.red, .orange, .yellow, .green, .teal, .blue, .purple, .pink]
     
     var body: some View {
         
