@@ -53,10 +53,16 @@ class ReminderService {
     }
     
     // Get all of the reminders in one specific list
-    static func getRemindersByList(myList: MyList) -> NSFetchRequest<Reminder> {
+    static func getRemindersByList(myList: MyList, includeCompleted: Bool) -> NSFetchRequest<Reminder> {
         let request = Reminder.fetchRequest()
         request.sortDescriptors = []
-        request.predicate = NSPredicate(format: "list = %@ AND isCompleted = false", myList)
+        
+        // Give a different predicate if the request asks for completed reminders too
+        if includeCompleted {
+            request.predicate = NSPredicate(format: "list = %@", myList)
+        } else {
+            request.predicate = NSPredicate(format: "list = %@ AND isCompleted = false", myList)
+        }
         return request
     }
     

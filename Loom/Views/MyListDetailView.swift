@@ -26,7 +26,7 @@ struct MyListDetailView: View {
     // On initialization, find all reminders
     init(myList: MyList) {
         self.myList = myList
-        _reminderResults = FetchRequest(fetchRequest: ReminderService.getRemindersByList(myList: myList))
+        _reminderResults = FetchRequest(fetchRequest: ReminderService.getRemindersByList(myList: myList, includeCompleted: false))
     }
     
     var body: some View {
