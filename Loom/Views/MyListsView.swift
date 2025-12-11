@@ -9,49 +9,54 @@ import SwiftUI
 
 struct MyListsView: View {
     
-    // Get all lists that exist in the database
     let myLists: FetchedResults<MyList>
     
     var body: some View {
         
-        // Objects inside of this stack can be interacted to open sub-menus
+        // NavigationStack on top so all elements can take the user somewhere else
         NavigationStack {
             
             if myLists.isEmpty {
-                // Show that this category is empty
+                
                 Spacer()
-                Text("No reminders found")
+                Text("No categories found")
                 
             } else {
                 
-                // Iterate through all reminders if the list is not empty
-                ForEach(myLists) { myList in
+                // List added to allow dynamic interaction with lists
+                List {
                     
-                    // Create links to everything
-                    NavigationLink(value: myList) {
-                        VStack {
+                    // The ForEach iterates over the fetched data
+                    ForEach(myLists) { myList in
+                        
+                        NavigationLink(value: myList) {
                             
-                            // Create a view displaying the name and color of each list in its own struct
+                            // Create a cell in the frame
                             MyListCellView(myList: myList)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding([.leading], 10)
                                 .font(.title3)
-                            Divider()
+                            
                         }
+                        
                     }
-                
-                // Whole menu is scrollable, not each individual list
+                    
                 }.scrollContentBackground(.hidden)
-                    .navigationDestination(for: MyList.self) { myList in
-                        // Create a navigaiton title in each navigation's destination and show list details
-                        MyListDetailView(myList: myList)
-                            .navigationTitle(myList.name)
-                    }
+                
             }
             
         }
+        
+        // Apply destination to the top-level stack
+        .navigationDestination(for: MyList.self) { myList in
+            MyListDetailView(myList: myList)
+                .navigationTitle(myList.name)
+        }
     }
 }
+
+// NOTE: Remember to apply the height fix to MyListsView in HomeView
+// if HomeView is wrapping this view in a ScrollView.
 
 /*
 #Preview {
