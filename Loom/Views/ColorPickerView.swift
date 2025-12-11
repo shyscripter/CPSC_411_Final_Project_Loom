@@ -17,29 +17,48 @@ struct ColorPickerView: View {
     
     var body: some View {
         
-        // Creates ordered buttons of each color that's hardcoded above
-        HStack {
+        // Define a grid layout with four flexible columns
+        let columns: [GridItem] = [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+        
+        // Using ScrollView allows the grid to scroll if there are many colors
+        ScrollView {
             
-            // Iterates through each existing color
-            ForEach(colors, id: \.self) { color in
+            // LazyVGrid arranges items in a vertical grid using the defined columns
+            LazyVGrid(columns: columns, spacing: 10) {
                 
-                // Stack creates icons for each color that exists in the hardcoded list
-                ZStack {
-                    Circle().fill()
-                        .foregroundColor(color)
-                        .padding(2)
-                    Circle()
-                        .strokeBorder(selectedColor == color ? .gray: .clear, lineWidth: 4)
-                        .scaleEffect(CGSize(width: 1.2, height: 1.2))
-                }.onTapGesture {
-                    selectedColor = color // Pressing the button assigns the color
+                // Iterates through each existing color
+                ForEach(colors, id: \.self) { color in
+                    
+                    // ZStack allows icon elements to be layered on top of each other
+                    ZStack {
+                        Circle().fill()
+                            .foregroundColor(color)
+                            .padding(2)
+                        
+                        // Outer circle for selection indicator
+                        Circle()
+                            .strokeBorder(selectedColor == color ? .gray : .clear, lineWidth: 4)
+                            .scaleEffect(CGSize(width: 1.2, height: 1.2))
+                    }
+                    .frame(width: 40, height: 40)
+                    
+                    // Pressing the button assigns the color
+                    .onTapGesture {
+                        selectedColor = color
+                    }
                 }
-                
-            }.padding()
-                .frame(maxWidth: .infinity, maxHeight: 100)
-                //.background(Color.primaryBackground)
-                .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+            }
+            // Adds padding around the entire grid
+            .padding()
         }
+        // .frame(maxWidth: .infinity, maxHeight: 100) // The frame might restrict the grid,
+                                                       // consider removing or adjusting it.
+        // .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
         
     }
 }
