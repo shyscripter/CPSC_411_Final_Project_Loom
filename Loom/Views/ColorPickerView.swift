@@ -65,5 +65,5 @@ struct ColorPickerView: View {
 
 // Preview with a hardcoded default color
 #Preview {
-    ColorPickerView(selectedColor: .constant(.yellow))
+    ColorPickerView(selectedColor: .constant(.red))
 }
