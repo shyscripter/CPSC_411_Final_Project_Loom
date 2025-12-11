@@ -103,4 +103,15 @@ class ReminderService {
 
     }
     
+    // Delete a list by deleting all reminders the list has, then the list itself from the databse
+    static func deleteList(_ myList: MyList) throws {
+        
+        // Go through all reminders this list has and delete them
+        
+        
+        // Delete the list from the database once it is empty
+        viewContext.delete(myList)
+        try save()
+    }
+    
 }
