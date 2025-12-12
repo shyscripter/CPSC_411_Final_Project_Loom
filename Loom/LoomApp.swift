@@ -11,6 +11,7 @@ import UserNotifications
 @main
 struct LoomApp: App {
     
+    // Stores setting for dark mode in-app instead of on the OS
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     // Request permission for notifications to be enabled on app startup
@@ -32,6 +33,8 @@ struct LoomApp: App {
             HomeView()
                 .environment(\.managedObjectContext,
                              CoreDataProvider.shared.persistentContainer.viewContext)
+                
+                // Apply light/dark mode whenever changed
                 .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
