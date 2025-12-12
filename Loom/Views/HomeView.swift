@@ -131,15 +131,14 @@ struct HomeView: View {
                     }
                 }
                 .listStyle(.plain)
-                .onChange(of: search, perform: {searchTerm in
-                    // Search bar functionality for when the text in the bar is changed
-                    searching = !searchTerm.isEmpty ? true: false
+                .onChange(of: search) { oldValue, newValue in
+                    searching = !newValue.isEmpty ? true: false
                     searchResults.nsPredicate = ReminderService.getRemindersBySearchTerm(search).predicate
-                })
-                .onChange(of: myListResults.count, perform: { _ in
+                }
+                .onChange(of: myListResults.count) {
                     // Get new reminder stats every time the VStack gains an object
                     reminderStatsValues = reminderStatsBuilder.build(myListResults: myListResults)
-                })
+                }
                 .overlay(alignment: .center, content: {
                     // Overlay the reminder list on top of the rest of the UI when searching
                     ReminderListView(reminders: searchResults)

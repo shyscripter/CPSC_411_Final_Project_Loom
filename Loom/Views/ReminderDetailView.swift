@@ -75,14 +75,15 @@ struct ReminderDetailView: View {
                         }
                         
                     // Edit the reminder's date in the database when changed by the user
-                    }.onChange(of: editConfig.hasDate) { hasDate in
-                        if hasDate {
+                    }
+                    .onChange(of: editConfig.hasDate) { oldValue, newValue in
+                        if newValue {
                             editConfig.reminderDate = Date()
                         }
                     
                     // Edit the reminder's time in the database when changed by the user
-                    }.onChange(of: editConfig.hasTime) { hasTime in
-                        if hasTime {
+                    }.onChange(of: editConfig.hasTime) { oldValue, newValue in
+                        if newValue {
                             editConfig.reminderTime = Date()
                         }
                     }

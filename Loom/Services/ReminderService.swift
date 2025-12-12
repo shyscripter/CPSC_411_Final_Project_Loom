@@ -108,7 +108,7 @@ class ReminderService {
     static func deleteList(_ myList: MyList) throws {
         
         // Find all reminders in this particular list
-        var reminderResults = FetchRequest<Reminder>(fetchRequest: getRemindersByList(myList: myList, includeCompleted: false))
+        let reminderResults = FetchRequest<Reminder>(fetchRequest: getRemindersByList(myList: myList, includeCompleted: false))
         
         // Delete every reminder inside of the list
         for reminder in reminderResults.wrappedValue {
