@@ -55,7 +55,7 @@ struct AddNewListView: View {
         // Creates a toolbar on top to create a new list
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("New List")
+                Text("New Category")
                     .font(.headline)
             }
             
