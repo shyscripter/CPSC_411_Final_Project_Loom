@@ -31,8 +31,7 @@ struct LoomApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environment(\.managedObjectContext,
-                             CoreDataProvider.shared.persistentContainer.viewContext)
+                .environment(\.managedObjectContext, CoreDataProvider.shared.persistentContainer.viewContext)
                 
                 // Apply light/dark mode whenever changed
                 .preferredColorScheme(isDarkMode ? .dark : .light)
