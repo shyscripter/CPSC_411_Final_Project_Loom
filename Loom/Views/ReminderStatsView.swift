@@ -13,7 +13,7 @@ struct ReminderStatsView: View {
     let icon: String
     let title: String
     var count: Int?
-    var iconColor: Color = .primary
+    var iconColor: Color = .white
     let frameColor: Color
     
     var body: some View {
@@ -31,7 +31,7 @@ struct ReminderStatsView: View {
                         .font(.title)
                     Text(title)
                         .opacity(0.8)
-                        .foregroundColor(.primary)
+                        .foregroundColor(.white)
                 }
                 
                 // Spacing in between
@@ -47,7 +47,7 @@ struct ReminderStatsView: View {
             }.padding()
                 .frame(maxWidth: .infinity)
                 .background(frameColor)
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
         }
     }
