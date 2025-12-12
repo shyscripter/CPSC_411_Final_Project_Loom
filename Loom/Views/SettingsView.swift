@@ -17,6 +17,13 @@ struct SettingsView: View {
         // All settings stored in this scrollable view
         ScrollView {
             
+            // Dark mode toggle
+            Toggle(isOn: $isDarkMode) {
+                Label("Dark Mode", systemImage: isDarkMode ? "moon.fill" : "sun.max.fill")
+            }
+            .padding(.horizontal)
+            .padding(.top)
+            
         }
         
     }

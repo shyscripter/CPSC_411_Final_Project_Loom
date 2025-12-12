@@ -52,13 +52,6 @@ struct HomeView: View {
                 // Vertical stack to place everything on top of each other
                 VStack {
                     
-                    // Dark mode toggle
-                    Toggle(isOn: $isDarkMode) {
-                        Label("Dark Mode", systemImage: isDarkMode ? "moon.fill" : "sun.max.fill")
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
-                    
                     // Allow the entire menu to be scrollable by wrapping everything in a ScrollView
                     ScrollView {
 
