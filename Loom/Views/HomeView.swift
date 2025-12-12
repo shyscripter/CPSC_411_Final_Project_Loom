@@ -135,6 +135,10 @@ struct HomeView: View {
                     searching = !searchTerm.isEmpty ? true: false
                     searchResults.nsPredicate = ReminderService.getRemindersBySearchTerm(search).predicate
                 })
+                .onChange(of: myListResults.count, perform: { _ in
+                    // Get new reminder stats every time the VStack gains an object
+                    reminderStatsValues = reminderStatsBuilder.build(myListResults: myListResults)
+                })
                 .overlay(alignment: .center, content: {
                     // Overlay the reminder list on top of the rest of the UI when searching
                     ReminderListView(reminders: searchResults)
