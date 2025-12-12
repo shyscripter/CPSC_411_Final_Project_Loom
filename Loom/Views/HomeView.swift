@@ -10,6 +10,9 @@ import SwiftUI
 // Main view that is used to initialize the rest of the app's UI components
 struct HomeView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
+    
     // Request for list finding
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>
@@ -52,8 +55,16 @@ struct HomeView: View {
                 // Vertical stack to place everything on top of each other
                 VStack {
                     
+                    // Dark mode toggle
+                    Toggle(isOn: $isDarkMode) {
+                        Label("Dark Mode", systemImage: isDarkMode ? "moon.fill" : "sun.max.fill")
+                    }
+                    .padding(.horizontal)
+                    .padding(.top)
+                    
                     // Allow the entire menu to be scrollable by wrapping everything in a ScrollView
                     ScrollView {
+
                         
                         // Two buttons on the top of a 2x2 grid
                         HStack {
