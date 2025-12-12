@@ -152,7 +152,18 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
                     .navigationTitle("Your Reminders")
-                
+                    .toolbar {
+                        
+                        // Settings icon
+                        NavigationLink {
+                            SettingsView()
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .foregroundColor(.primary)
+                        }
+                        
+                    }
+                    
             }
             .searchable(text: $search) // Binds the search string to the search bar
         }
