@@ -100,13 +100,13 @@ struct HomeView: View {
                         
                         // View all existing lists
                         MyListsView(myLists: myListResults)
-                            // FIX 2: Height constraint to prevent list collapse inside ScrollView
                             .frame(height: CGFloat(myListResults.count) * 50 + 20)
                             .navigationDestination(for: MyList.self) { myList in
                                 MyListDetailView(myList: myList)
                                     .navigationTitle(myList.name)
                             }
                         
+                        // Button to add a new category
                         Button {
                             isPresented = true
                         } label: {
