@@ -36,7 +36,7 @@ struct AddNewListView: View {
                     .font(.system(size: 100))
                 
                 // Text field to display the name of the list
-                TextField("List Name", text: $name)
+                TextField("Category Name", text: $name)
                     .multilineTextAlignment(.center)
                     .textFieldStyle(.roundedBorder)
                 
