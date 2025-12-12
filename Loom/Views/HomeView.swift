@@ -10,9 +10,6 @@ import SwiftUI
 // Main view that is used to initialize the rest of the app's UI components
 struct HomeView: View {
     
-    @AppStorage("isDarkMode") private var isDarkMode = false
-
-    
     // Request for list finding
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>

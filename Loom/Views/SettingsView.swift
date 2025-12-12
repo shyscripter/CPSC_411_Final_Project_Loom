@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    // Dark mode
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        // All settings stored in this scrollable view
+        ScrollView {
+            
+        }
+        
     }
 }
 
