@@ -23,16 +23,6 @@ struct MyListCellView: View {
             
             // Show the name of the list
             Text(myList.name)
-            
-            // Add spacing
-            Spacer()
-            
-            // Right-facing arrow on the right side of the cell to show this can be opened
-            // This just makes it a little more obvious that you can interact with categories
-            // Image(systemName: "chevron.right")
-//                .foregroundColor(.gray)
-//                .opacity(0.4)
-//                .padding([.trailing], 10)
         }
     }
 }
