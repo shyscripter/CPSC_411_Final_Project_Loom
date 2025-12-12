@@ -160,6 +160,7 @@ struct HomeView: View {
                         } label: {
                             Image(systemName: "gearshape")
                                 .foregroundColor(.primary)
+                                .font(.title2)
                                 .imageScale(.medium)
                         }
                         
