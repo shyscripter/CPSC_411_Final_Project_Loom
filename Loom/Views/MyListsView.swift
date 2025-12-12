@@ -11,6 +11,18 @@ struct MyListsView: View {
     
     let myLists: FetchedResults<MyList>
     
+    // Function to handle deletion logic
+    private func deleteList(_ indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let myList = myLists[index]
+            do {
+                try ReminderService.deleteList(myList)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     var body: some View {
         
         if myLists.isEmpty {
@@ -26,6 +38,7 @@ struct MyListsView: View {
                 // The ForEach iterates over the fetched data
                 ForEach(myLists) { myList in
                     
+                    // Not adding a new navigation stack here because HomeView controls this
                     NavigationLink(value: myList) {
                         
                         // Create a cell in the frame
@@ -33,10 +46,9 @@ struct MyListsView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding([.leading], 10)
                             .font(.title3)
-                        
                     }
                     
-                }
+                }.onDelete(perform: deleteList) // Makes lists deletable
                 
             }.scrollContentBackground(.hidden)
             
