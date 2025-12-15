@@ -8,7 +8,7 @@ This application was created as a project for CPSC 411 - iOS App Development. Th
 - For running on a real device, an Apple ID added to Xcode for code signing.
 # Setting Up The Project
 - Download or unzip the project folder CPSC_411_Final_Project_Loom.
-- Open` Loom.xcodeproj` in Xcode.
+- Open `Loom.xcodeproj` in Xcode.
 - In the Xcode toolbar, select the Loom target.
 - Verify that the target iOS version in Deployment Info matches your simulator or device (e.g., iOS 17+).
 # Deploying To A Simulator
